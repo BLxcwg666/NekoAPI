@@ -26,8 +26,8 @@ VERSION=1.2              # 版本信息，喜欢可以随便改
 ```
 
 # 功能
-`/random/sticker`  从 cdn.xcnya.cn 随机一张贴纸
-`/network/getip`   获取访客 IP，通过 Curl Wget 访问直接返回 IP
+`/random/sticker`  从 cdn.xcnya.cn 随机一张贴纸  
+`/network/getip`   获取访客 IP，如果通过 Curl Wget 访问直接返回 IP
 
 # 特性
 - 支持 SSL
