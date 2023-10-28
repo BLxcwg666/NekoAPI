@@ -6,15 +6,18 @@
 //         
 // Copyright © 2021-2023 NyaStudio, LLC
 // NekoAPI Router | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
-// Lastest Update at 2023/10/28 20:34
+// Lastest Update at 2023/10/29 01:11
 //「 要是追不上光，那就变成光吧。」
 
 module.exports = function (app) {
 
   const express = require("express");
   const dotenv = require("dotenv").config();
+
   const version = process.env.VERSION;
-  const time = new Date();
+  function time() {
+    return new Date().toISOString().slice(0, 19).replace('T', ' ') + " UTC";
+  };
 
   // Random Routers
   const sticker = require('./random/sticker');
@@ -26,7 +29,7 @@ module.exports = function (app) {
 
   // Main Router
   app.all("/", (req, res) => {
-    res.status(200).json({ code: "200", msg:"API 运行正常喵~", version: version, time: time });
+    res.status(200).json({ code: "200", msg:"API 运行正常喵~", version: version, time: time() });
   });
 
   app.use((req, res) => {

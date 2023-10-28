@@ -5,13 +5,16 @@
 // |_| \_|\___|_|\_\___/_/   \_\_|  |___|
 //
 // Copyright © 2021-2023 NyaStudio, LLC
-// Version 1.2 | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
-// Lastest Update at 2023/10/28 20:34
+// Version 1.3 | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
+// Lastest Update at 2023/10/29 01:12
 //「 ご無事で何よりです。」
 
 const fs = require("fs");
+const path = require("path");
 const http = require("http");
 const https = require("https");
+const morgan = require('morgan');
+const moment = require('moment');
 const express = require("express");
 const dotenv = require("dotenv").config();
 
@@ -21,6 +24,26 @@ const port = process.env.PORT;
 const is443 = process.env.PORT === '443';
 const ssl = process.env.ENABLE_SSL === 'true';
 
+// 创建 Logs 文件夹
+const logsFolder = path.join(__dirname, 'logs');
+if (!fs.existsSync(logsFolder)) {
+  fs.mkdirSync(logsFolder);
+}
+
+// 时间
+function time() {
+  return new Date().toISOString().slice(0, 19).replace('T', ' ');
+};
+
+// 写 Log
+morgan.token('time', time);
+morgan.token('ipheader', process.env.IP_HEADER);
+const logFormat = '[:time]  :req[ipheader] / :remote-addr - ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
+const LogStream = fs.createWriteStream(path.join(logsFolder, moment().format('YYYY-MM-DD HH-mm-ss') + '.log'), { flags: 'a' });
+app.use(morgan(logFormat, { stream: LogStream }));
+app.use(morgan(logFormat));
+
+// 载入路由
 require('./router')(app);
 
 // 开机
@@ -39,11 +62,11 @@ if (ssl) {
   }
 
   https.createServer(sslConfig, app).listen(port, host, () => {
-    console.log(`NekoAPI Running at ${host} port ${port}${ssl ? ' with SSL' : ''}`);
+    console.log(`[${time()}] NekoAPI Running at ${host} port ${port}${ssl ? ' with SSL' : ''}`);
   });
 
 } else {
   app.listen(port, host, () => {
-    console.log(`NekoAPI Running at ${host} port ${port}`);
+    console.log(`[${time()}] NekoAPI Running at ${host} port ${port}`);
   });
 }

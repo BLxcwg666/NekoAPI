@@ -6,15 +6,16 @@
 //
 // Copyright © 2021-2023 NyaStudio, LLC
 // NekoAPI Network-IP | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
-// Lastest Update at 2023/10/28 20:34
+// Lastest Update at 2023/10/29 01:12
 //「 想说什么就说，想做什么就做，我们不就是这么一直过来的吗？」
 
 const express = require("express");
+const dotenv = require("dotenv").config();
 const router = express.Router();
 
 router.get("/", (req, res) => {
     const userAgent = req.headers["user-agent"];
-    let clientIp = req.headers["cf_connecting_ip"] || req.headers["x-real-ip"] || req.headers["x-forwarded-for"] || req.ip;
+    let clientIp = req.headers[process.env.IP_HEADER] || req.ip;
 
     if (userAgent && (userAgent.includes("curl") || userAgent.includes("wget"))) {
       res.send(clientIp);

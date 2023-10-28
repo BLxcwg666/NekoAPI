@@ -2,6 +2,32 @@
   "dependencies": {
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "express-force-https": "^1.0.0"
-  }
+    "express-force-https": "^1.0.0",
+    "moment": "^2.29.4",
+    "morgan": "^1.10.0"
+  },
+  "bin": "main.js",
+  "name": "nekoapi",
+  "description": "A Mixed Node.JS API with Express（Just For Fun",
+  "version": "1.0.2",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BLxcwg666/NekoAPI.git"
+  },
+  "keywords": [
+    "nekoapi",
+    "express",
+    "api",
+    "webapi"
+  ],
+  "author": "BLxcwg666",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/BLxcwg666/NekoAPI/issues"
+  },
+  "homepage": "https://github.com/BLxcwg666/NekoAPI#readme"
 }
