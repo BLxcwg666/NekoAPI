@@ -5,9 +5,9 @@
 // |_| \_|\___|_|\_\___/_/   \_\_|  |___|
 //
 // Copyright © 2021-2023 NyaStudio, LLC
-// Version 1.0 | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
-// Lastest Update at 2023/10/28
-//「 死并非再生的对立面，而是作为生的一部分永存于生中。」
+// Version 1.2 | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
+// Lastest Update at 2023/10/28 20:34
+//「 ご無事で何よりです。」
 
 const fs = require("fs");
 const http = require("http");
@@ -20,20 +20,8 @@ const host = process.env.HOST;
 const port = process.env.PORT;
 const is443 = process.env.PORT === '443';
 const ssl = process.env.ENABLE_SSL === 'true';
-const version = process.env.VERSION;
 
-// Random Routers
-const sticker = require('./random/sticker');
-app.use('/random/sticker', sticker);  // Sticker
-
-// Main Router
-app.all("/", (req, res) => {
-  res.status(200).json({ code: "200", msg:"喵~", version: version });
-});
-
-app.use((req, res) => {
-  res.status(404).json({ code: "404", msg: "你在找什么喵？" });
-});
+require('./router')(app);
 
 // 开机
 if (ssl) {

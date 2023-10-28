@@ -5,8 +5,8 @@
 // |____/ \__|_|\___|_|\_\___|_|   
 // 
 // Copyright © 2021-2023 NyaStudio, LLC
-// Version 1.0 | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
-// Lastest Update at 2023/10/28
+// NekoAPI Random Sticker | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
+// Lastest Update at 2023/10/28 18:52
 //「 死并非再生的对立面，而是作为生的一部分永存于生中。」
 
 const express = require("express");
