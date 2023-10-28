@@ -37,5 +37,8 @@ IP_HEADER=cf-connecting-ip       # 在某些地方会用到，如果你没有使
 
 # 展望未来
 - ASCII 艺术字开屏
-- 发布 Rels
+- 发布 Rel
 - 集群支持
+- 彩色的 Log
+- 修改服务器响应头
+- 全局 favicon.ico
