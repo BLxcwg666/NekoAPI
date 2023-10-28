@@ -5,9 +5,9 @@
 // |_| \_|\___|_|\_\___/_/   \_\_|  |___|
 //
 // Copyright © 2021-2023 NyaStudio, LLC
-// Version 1.3 | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
-// Lastest Update at 2023/10/29 01:12
-//「 ご無事で何よりです。」
+// Version 1.4 | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
+// Lastest Update at 2023/10/29 02:16
+//「 想说什么就说，想做什么就做，我们不就是这么一直过来的吗？」
 
 const fs = require("fs");
 const path = require("path");
@@ -37,8 +37,7 @@ function time() {
 
 // 写 Log
 morgan.token('time', time);
-morgan.token('ipheader', process.env.IP_HEADER);
-const logFormat = '[:time]  :req[ipheader] / :remote-addr - ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
+const logFormat = `[:time] :req[${process.env.IP_HEADER}] / :remote-addr - ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"`;
 const LogStream = fs.createWriteStream(path.join(logsFolder, moment().format('YYYY-MM-DD HH-mm-ss') + '.log'), { flags: 'a' });
 app.use(morgan(logFormat, { stream: LogStream }));
 app.use(morgan(logFormat));
