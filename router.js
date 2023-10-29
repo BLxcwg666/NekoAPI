@@ -6,7 +6,7 @@
 //         
 // Copyright © 2021-2023 NyaStudio, LLC
 // NekoAPI Router | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
-// Lastest Update at 2023/10/29 01:11
+// Lastest Update at 2023/10/29 17:31
 //「 要是追不上光，那就变成光吧。」
 
 module.exports = function (app) {
@@ -14,24 +14,25 @@ module.exports = function (app) {
   const express = require("express");
   const dotenv = require("dotenv").config();
 
-  const version = process.env.VERSION;
+  const version = 1.5;
   function time() {
     return new Date().toISOString().slice(0, 19).replace('T', ' ') + " UTC";
   };
 
-  // Random Routers
-  const sticker = require('./random/sticker');
-  app.use('/random/sticker', sticker);  // Sticker
-
-  // Network Routers
-  const ip = require("./network/getip");
-  app.use("/network/getip", ip);  // Get IP
-
-  // Main Router
+  // Main Route
   app.all("/", (req, res) => {
     res.status(200).json({ code: "200", msg:"API 运行正常喵~", version: version, time: time() });
   });
 
+  // Random Routes
+  const sticker = require('./random/sticker');
+  app.use('/random/sticker', sticker);  // Sticker
+
+  // Network Routes
+  const ip = require("./network/getip");
+  app.use("/network/getip", ip);  // Get IP
+
+  // UnMatched Route
   app.use((req, res) => {
     res.status(404).json({ code: "404", msg: "你在找什么喵？" });
   });
