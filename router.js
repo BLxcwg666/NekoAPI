@@ -6,7 +6,7 @@
 //         
 // Copyright © 2021-2023 NyaStudio, LLC
 // NekoAPI Router | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
-// Lastest Update at 2023/10/30 00:54
+// Lastest Update at 2023/10/30 01:31
 //「 要是追不上光，那就变成光吧。」
 
 module.exports = function (app) {
@@ -14,7 +14,7 @@ module.exports = function (app) {
   const express = require("express");
   const dotenv = require("dotenv").config();
 
-  const version = "1.8";
+  const version = "1.9";
   function time() {
     return new Date().toISOString().slice(0, 19).replace('T', ' ') + " UTC";
   };
@@ -29,8 +29,8 @@ module.exports = function (app) {
   app.use('/random/sticker', sticker);  // Sticker
 
   // Network Routes
-  const ip = require("./network/getip");
-  app.use("/network/getip", ip);  // Get IP
+  const ip = require("./net/getip");
+  app.use("/net/getip", ip);  // Get IP
 
   // UnMatched Route
   app.use((req, res) => {
