@@ -23,24 +23,29 @@ const host = process.env.HOST;
 const port = process.env.PORT;
 const is443 = process.env.PORT === '443';
 const ssl = process.env.ENABLE_SSL === 'true';
-
-// 创建 Logs 文件夹
-const logsFolder = path.join(__dirname, 'logs');
-if (!fs.existsSync(logsFolder)) {
-  fs.mkdirSync(logsFolder);
-}
+const log = process.env.ENABLE_LOG === 'true';
 
 // 时间
 function time() {
   return new Date().toISOString().slice(0, 19).replace('T', ' ');
 };
 
-// 写 Log
+// 定义 Log
 morgan.token('time', time);
 const logFormat = `[:time] :req[${process.env.IP_HEADER}] / :remote-addr - ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"`;
-const LogStream = fs.createWriteStream(path.join(logsFolder, moment().format('YYYY-MM-DD HH-mm-ss') + '.log'), { flags: 'a' });
-app.use(morgan(logFormat, { stream: LogStream }));
-app.use(morgan(logFormat));
+
+// 判断开没开要写 Log
+if (log) {
+  const logsFolder = path.join(__dirname, 'logs');
+  const LogStream = fs.createWriteStream(path.join(logsFolder, moment().format('YYYY-MM-DD HH-mm-ss') + '.log'), { flags: 'a' });
+  if (!fs.existsSync(logsFolder)) {
+    fs.mkdirSync(logsFolder);
+  }
+  app.use(morgan(logFormat, { stream: LogStream }));
+  app.use(morgan(logFormat));
+} else {
+  app.use(morgan(logFormat));
+}
 
 // 载入路由
 require('./router')(app);
