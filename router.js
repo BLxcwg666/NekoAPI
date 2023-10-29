@@ -14,7 +14,7 @@ module.exports = function (app) {
   const express = require("express");
   const dotenv = require("dotenv").config();
 
-  const version = 1.5;
+  const version = "1.5";
   function time() {
     return new Date().toISOString().slice(0, 19).replace('T', ' ') + " UTC";
   };
