@@ -28,7 +28,6 @@ const log = process.env.ENABLE_LOG === 'true';
 
 app.use(compression());
 
-
 // 时间
 function time() {
   return new Date().toISOString().slice(0, 19).replace('T', ' ');
