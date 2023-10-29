@@ -22,7 +22,8 @@ CERT_PATH="./Certs/api.local.cat.pem"                  # SSL 证书路径
 CERT_KEY_PATH="./Certs/api.local.cat-key.pem"          # SSL 密钥路径
 
 # API 配置
-VERSION=1.2              # 版本信息，喜欢可以随便改
+VERSION=1.4                      # 版本信息，喜欢可以随便改
+IP_HEADER=cf-connecting-ip       # 在某些地方会用到，如果你没有使用 CDN 请清空此项，否则将此项设置为你的 CDN 返回的用户真 IP
 ```
 
 # 功能
@@ -31,3 +32,14 @@ VERSION=1.2              # 版本信息，喜欢可以随便改
 
 # 特性
 - 支持 SSL
+- 支持自定义用户真 IP HTTP 头   
+- 访问日志写入 .log 文件
+
+# 展望未来
+- ASCII 艺术字开屏
+- 发布 Rel
+- 集群支持
+- 彩色的 Log
+- 修改服务器响应头
+- 全局 favicon.ico
+- 自定义 / 目录
