@@ -42,3 +42,4 @@ IP_HEADER=cf-connecting-ip       # 在某些地方会用到，如果你没有使
 - 彩色的 Log
 - 修改服务器响应头
 - 全局 favicon.ico
+- 自定义 / 目录
