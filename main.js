@@ -5,14 +5,14 @@
 // |_| \_|\___|_|\_\___/_/   \_\_|  |___|
 //
 // Copyright © 2021-2023 NyaStudio, LLC
-// Version 1.7 | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
-// Lastest Update at 2023/10/30 00:56
+// Version 1.8 | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
+// Lastest Update at 2023/10/30 01:26
 //「 想说什么就说，想做什么就做，我们不就是这么一直过来的吗？」
 
 const fs = require("fs");
 const path = require("path");
 const http = require("http");
-const spdy = require("spdy");
+const https = require("https");
 const morgan = require('morgan');
 const moment = require('moment');
 const express = require("express");
@@ -27,6 +27,7 @@ const ssl = process.env.ENABLE_SSL === 'true';
 const log = process.env.ENABLE_LOG === 'true';
 
 app.use(compression());
+
 
 // 时间
 function time() {
@@ -57,10 +58,7 @@ require('./router')(app);
 if (ssl) {
   const sslConfig = {
     cert: fs.readFileSync(process.env.CERT_PATH),
-    key: fs.readFileSync(process.env.CERT_KEY_PATH),
-    spdy: {
-      protocols: ['h2']
-    }
+    key: fs.readFileSync(process.env.CERT_KEY_PATH)
   };
 
   if (is443) {
@@ -70,7 +68,8 @@ if (ssl) {
       }).end();
     }).listen(80);
   }
-  spdy.createServer(sslConfig, app).listen(port, host, () => {
+
+  https.createServer(sslConfig, app).listen(port, host, () => {
     console.log(`[${time()}] NekoAPI Running at ${host} port ${port}${ssl ? ' with SSL' : ''}`);
   });
 
