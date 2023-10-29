@@ -22,13 +22,13 @@ CERT_PATH="./Certs/api.local.cat.pem"                  # SSL 证书路径
 CERT_KEY_PATH="./Certs/api.local.cat-key.pem"          # SSL 密钥路径
 
 # API 配置
-VERSION=1.4                      # 版本信息，喜欢可以随便改
+VERSION=1.9                      # 版本信息，喜欢可以随便改
 IP_HEADER=cf-connecting-ip       # 在某些地方会用到，如果你没有使用 CDN 请清空此项，否则将此项设置为你的 CDN 返回的用户真 IP
 ```
 
 # 功能
 `/random/sticker`  从 cdn.xcnya.cn 随机一张贴纸  
-`/network/getip`   获取访客 IP，如果通过 Curl Wget 访问直接返回 IP
+`/net/getip`   获取访客 IP，如果通过 Curl Wget 访问直接返回 IP
 
 # 特性
 - 支持 SSL
