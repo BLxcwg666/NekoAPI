@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
     if (userAgent && (userAgent.includes("curl") || userAgent.includes("wget"))) {
       res.send(clientIp);
     } else {
-      res.status(200).json({ code:"200", msg: "OK", data: { IP: clientIp } });
+      res.status(200).json({ code:"200", msg: "OK", data: { "IP": clientIp } });
     }
 });
 

@@ -61,6 +61,12 @@ if (log) {
 }
 
 // 载入路由
+app.on
+
+app.all('/ping', (req, res) => {
+  res.status(200).json({ code: "200", msg: "Pong!" });
+});
+
 require('./Routes/router')(app);
 
 // 开机

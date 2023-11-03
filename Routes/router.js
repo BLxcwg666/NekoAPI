@@ -15,7 +15,7 @@ module.exports = function (app) {
   const express = require("express");
   const dotenv = require("dotenv").config();
 
-  const version = "2.0";
+  const version = "2.1";
   function time() {
     return new Date().toISOString().slice(0, 19).replace('T', ' ') + " UTC";
   };
@@ -30,6 +30,7 @@ module.exports = function (app) {
   
   // Network Routes
   app.use("/net/getip", require("./net/getip"));  // Get IP
+  app.use("/net/getua", require("./net/getua"));  // Get User-Agent
   
   // UnMatched Route
   app.use((req, res) => {
