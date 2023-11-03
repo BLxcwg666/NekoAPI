@@ -11,30 +11,35 @@
 
 module.exports = function (app) {
 
+  const chalk = require("chalk");
   const express = require("express");
   const dotenv = require("dotenv").config();
 
-  const version = "1.9";
+  const version = "2.0";
   function time() {
     return new Date().toISOString().slice(0, 19).replace('T', ' ') + " UTC";
   };
 
   // Main Route
-  app.all("/", (req, res) => {
-    res.status(200).json({ code: "200", msg:"API 运行正常喵~", version: version, time: time() });
+  app.all('/', (req, res) => {
+    res.status(200).json({ code: "200", msg: "API 运行正常喵~", version: version, time: time() });
   });
-
+  
   // Random Routes
-  const sticker = require('./random/sticker');
-  app.use('/random/sticker', sticker);  // Sticker
-
+  app.use('/random/sticker', require('./random/sticker'));  // Sticker
+  
   // Network Routes
-  const ip = require("./net/getip");
-  app.use("/net/getip", ip);  // Get IP
-
+  app.use("/net/getip", require("./net/getip"));  // Get IP
+  
   // UnMatched Route
   app.use((req, res) => {
     res.status(404).json({ code: "404", msg: "你在找什么喵？" });
+  });
+  
+  // Error？
+  app.use((err, req, res, next) => {
+    console.log(chalk.red(`[${time}] An error occurred:`, err));
+    res.status(500).json({ code: "500", msg: "出错了呜呜呜~ 在运行过程中发生错误，请检查控制台日志喵~" });
   });
 
 }
