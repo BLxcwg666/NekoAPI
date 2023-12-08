@@ -5,8 +5,8 @@
 // |_| \_|\___|_|\_\___/_/   \_\_|  |___|
 //
 // Copyright © 2021-2023 NyaStudio, LLC
-// Version 2.0 | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
-// Lastest Update at 2023/11/4 01:30
+// Version 2.2 | By BLxcwg666 <huixcwg@gmail.com> @xcnya / @xcnyacn
+// Lastest Update at 2023/11/4 02:02
 //「 想说什么就说，想做什么就做，我们不就是这么一直过来的吗？」
 
 const fs = require("fs");
@@ -22,7 +22,7 @@ const dotenv = require("dotenv").config();
 const compression = require("compression");
 
 const app = express();
-const version = '2.0';
+const version = '2.2';
 const host = process.env.HOST;
 const port = process.env.PORT;
 const is443 = process.env.PORT === '443';
@@ -61,8 +61,6 @@ if (log) {
 }
 
 // 载入路由
-app.on
-
 app.all('/ping', (req, res) => {
   res.status(200).json({ code: "200", msg: "Pong!" });
 });
@@ -87,7 +85,7 @@ figlet("NekoAPI", function (err, data) {
   }
   console.log(data);
   console.log(`Cpoyright © 2021-2023 NyaStudio, LLC | Version ${version}`)
-  console.log("-----------------------------------------");
+  console.log("---------------------------------------------------------");
 
   const server = ssl
     ? https.createServer({
