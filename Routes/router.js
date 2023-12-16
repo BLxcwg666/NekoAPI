@@ -15,14 +15,9 @@ module.exports = function (app) {
   const express = require("express");
   const dotenv = require("dotenv").config();
 
-  const version = "2.2";
-  function time() {
-    return new Date().toISOString().slice(0, 19).replace('T', ' ') + " UTC";
-  };
-
   // Main Route
   app.all('/', (req, res) => {
-    res.status(200).json({ code: "200", msg: "API 运行正常喵~", version: version, time: time() });
+    res.status(200).json({ code: "200", msg: "API 运行正常喵~", version: `${global.version}`, time: `${global.time()}` + ' CST' });
   });
   
   // Random Routes
@@ -39,7 +34,7 @@ module.exports = function (app) {
   
   // Error？
   app.use((err, req, res, next) => {
-    console.log(chalk.red(`[${time}] An error occurred:`, err));
+    console.log(chalk.red(`[${global.time()}] An error occurred:`, err));
     res.status(500).json({ code: "500", msg: "出错了呜呜呜~ 在运行过程中发生错误，请检查控制台日志喵~" });
   });
 

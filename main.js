@@ -16,13 +16,17 @@ const https = require("https");
 const chalk = require("chalk");
 const figlet = require("figlet");
 const morgan = require("morgan");
-const moment = require("moment");
 const express = require("express");
 const dotenv = require("dotenv").config();
+const moment = require('moment-timezone');
 const compression = require("compression");
 
+global.version = "2.3";
+global.time = function() {
+    return moment().tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm:ss');
+}
+
 const app = express();
-const version = '2.2';
 const host = process.env.HOST;
 const port = process.env.PORT;
 const is443 = process.env.PORT === '443';
@@ -38,13 +42,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// 时间
-function time() {
-  return new Date().toISOString().slice(0, 19).replace('T', ' ');
-};
-
 // 定义 Log
-morgan.token('time', time);
+morgan.token('time', global.time);
 const logFormat = `[:time] :req[${process.env.IP_HEADER}] / :remote-addr - ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"`;
 
 // 判断开没开要写 Log
@@ -84,7 +83,7 @@ figlet("NekoAPI", function (err, data) {
     return;
   }
   console.log(data);
-  console.log(`Cpoyright © 2021-2023 NyaStudio, LLC | Version ${version}`)
+  console.log(`Cpoyright © 2021-2023 NyaStudio, LLC | Version ${global.version}`)
   console.log("---------------------------------------------------------");
 
   const server = ssl
