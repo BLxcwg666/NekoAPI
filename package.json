@@ -15,7 +15,8 @@
   "version": "2.0.0",
   "main": "main.js",
   "scripts": {
-    "test": "node main.js"
+    "start": "node main.js",
+    "install": "npm i -g pnpm && pnpm i"
   },
   "repository": {
     "type": "git",

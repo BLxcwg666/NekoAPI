@@ -20,10 +20,10 @@ module.exports = function (app) {
     res.status(200).json({ code: "200", msg: "API 运行正常喵~", version: `${global.version}`, time: `${global.time()}` + ' CST' });
   });
   
-  // Random Routes
+  // Random routes
   app.use('/random/sticker', require('./random/sticker'));  // Sticker
   
-  // Network Routes
+  // Network routes
   app.use("/net/getip", require("./net/getip"));  // Get IP
   app.use("/net/getua", require("./net/getua"));  // Get User-Agent
   

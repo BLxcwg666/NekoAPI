@@ -1,6 +1,7 @@
 # NekoAPI
 A Mixed Node.JS API with Express（Just For Fun  
-写着练手的玩意儿
+写给我自己用的  
+如果你看上了某些东西，欢迎搬到你的应用程序中，但是请注明来源，商业用途请提前跟我打招呼  
 
 ## Issues 长期收功能建议
 
@@ -22,7 +23,6 @@ CERT_PATH="./Certs/api.local.cat.pem"                  # SSL 证书路径
 CERT_KEY_PATH="./Certs/api.local.cat-key.pem"          # SSL 密钥路径
 
 # API 配置
-VERSION=1.9                      # 版本信息，喜欢可以随便改
 IP_HEADER=cf-connecting-ip       # 在某些地方会用到，如果你没有使用 CDN 请清空此项，否则将此项设置为你的 CDN 返回的用户真 IP
 ```
 

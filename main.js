@@ -21,7 +21,7 @@ const dotenv = require("dotenv").config();
 const moment = require('moment-timezone');
 const compression = require("compression");
 
-global.version = "2.3";
+global.version = "2.3.1";
 global.time = function() {
     return moment().tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm:ss');
 }
@@ -37,7 +37,6 @@ const log = process.env.ENABLE_LOG === 'true';
 app.use(compression());
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', '*');
   res.header('X-Powered-By', 'NekoAPI');
   next();
 });
@@ -64,7 +63,7 @@ app.all('/ping', (req, res) => {
   res.status(200).json({ code: "200", msg: "Pong!" });
 });
 
-require('./Routes/router')(app);
+require('./routes/router')(app);
 
 // 开机
 const serverType = ssl ? 'https' : 'http';
@@ -83,7 +82,7 @@ figlet("NekoAPI", function (err, data) {
     return;
   }
   console.log(data);
-  console.log(`Cpoyright © 2021-2023 NyaStudio, LLC | Version ${global.version}`)
+  console.log(`Cpoyright © 2021-2024 NyaStudio, LLC | Version ${global.version}`)
   console.log("---------------------------------------------------------");
 
   const server = ssl
