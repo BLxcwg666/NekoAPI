@@ -82,7 +82,7 @@ figlet("NekoAPI", function (err, data) {
     return;
   }
   console.log(data);
-  console.log(`Cpoyright © 2021-2024 NyaStudio, LLC | Version ${global.version}`)
+  console.log(`Cpoyright © 2021-2025 NyaStudio, LLC | Version ${global.version}`)
   console.log("---------------------------------------------------------");
 
   const server = ssl
