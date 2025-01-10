@@ -15,9 +15,9 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
     const userAgent = req.headers["user-agent"];
-    let clientIp = req.headers['x-forwarded-for']?.split(',')[0]?.trim() 
-    || req.headers[process.env.IP_HEADER]?.trim() 
-    || req.ip;
+    let clientIp = req.headers['x-forwarded-for']
+    ? req.headers['x-forwarded-for'].split(',')[0]
+    : req.headers[process.env.IP_HEADER] || req.ip;
 
     if (userAgent && (userAgent.includes("curl") || userAgent.includes("wget"))) {
       res.send(clientIp);
